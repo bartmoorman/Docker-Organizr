@@ -15,6 +15,9 @@ RUN apt-get update \
     php-sqlite3 \
     php-xml \
     php-zip \
+    ssl-cert \
+ && a2enmod \
+    ssl \
  && git clone https://github.com/causefx/Organizr \
  && apt-get autoremove --yes --purge \
  && apt-get clean \
@@ -24,6 +27,6 @@ COPY apache2/ /etc/apache2/
 
 VOLUME /config
 
-EXPOSE 9357
+EXPOSE 9753 9357
 
 CMD ["/etc/apache2/start.sh"]
