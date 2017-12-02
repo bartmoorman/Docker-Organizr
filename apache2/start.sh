@@ -17,4 +17,4 @@ fi
 
 exec $(which apache2ctl) \
     -D FOREGROUND \
-    -D ${INSECURE:-HTTPD_SSL}
+    -D ${HTTPD_SECURITY:-HTTPD_SSL}
