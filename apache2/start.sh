@@ -15,4 +15,6 @@ if [ ! -d /config/httpd/ssl ]; then
     ln --symbolic --force /etc/ssl/private/ssl-cert-snakeoil.key /config/httpd/ssl/organizr.key
 fi
 
-exec $(which apache2ctl) -D FOREGROUND
+exec $(which apache2ctl) \
+    -D FOREGROUND \
+    -D ${INSECURE:-HTTPD_SSL}

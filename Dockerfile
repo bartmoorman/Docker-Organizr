@@ -27,6 +27,6 @@ COPY apache2/ /etc/apache2/
 
 VOLUME /config
 
-EXPOSE 9753 9357
+EXPOSE 9357
 
 CMD ["/etc/apache2/start.sh"]
