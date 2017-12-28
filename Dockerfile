@@ -17,6 +17,8 @@ RUN apt-get update \
     php-zip \
     ssl-cert \
  && a2enmod \
+    remoteip \
+    rewrite \
     ssl \
  && git clone https://github.com/causefx/Organizr \
  && apt-get autoremove --yes --purge \
