@@ -9,6 +9,14 @@ fi
 rm --recursive --force /var/www/Organizr/config
 ln --symbolic --force /config/config /var/www/Organizr/
 
+if [ ! -d /var/www/Organizr/images/cache ]; then
+    install --owner www-data --group www-data --directory /var/www/Organizr/images/cache
+fi
+
+if [ -d /config/httpd/images ]; then
+    ln --symbolic --force /config/httpd/images/* /var/www/Organizr/images
+fi
+
 if [ ! -d /config/httpd/ssl ]; then
     mkdir --parents /config/httpd/ssl
     ln --symbolic --force /etc/ssl/certs/ssl-cert-snakeoil.pem /config/httpd/ssl/organizr.crt

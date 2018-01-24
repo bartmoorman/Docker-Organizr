@@ -6,9 +6,13 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 WORKDIR /var/www
 
-RUN apt-get update \
+RUN echo 'deb http://ppa.launchpad.net/certbot/certbot/ubuntu xenial main' > /etc/apt/sources.list.d/certbot.list \
+ && echo 'deb-src http://ppa.launchpad.net/certbot/certbot/ubuntu xenial main' >> /etc/apt/sources.list.d/certbot.list \
+ && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 75BCA694 \
+ && apt-get update \
  && apt-get install --yes --no-install-recommends \
     apache2 \
+    certbot \
     curl \
     git \
     libapache2-mod-php \
