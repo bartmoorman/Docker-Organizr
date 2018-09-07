@@ -1,6 +1,7 @@
 FROM bmoorman/ubuntu:xenial
 
-ENV HTTPD_SERVERNAME="localhost"
+ENV HTTPD_SERVERNAME="localhost" \
+    HTTPD_PORT="9357"
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
@@ -25,6 +26,9 @@ RUN echo 'deb http://ppa.launchpad.net/certbot/certbot/ubuntu xenial main' > /et
     remoteip \
     rewrite \
     ssl \
+ && sed --in-place --regexp-extended \
+    --expression 's/^(Include\s+ports\.conf)$/#\1/' \
+    /etc/apache2/apache2.conf \
  && git clone https://github.com/causefx/Organizr \
  && apt-get autoremove --yes --purge \
  && apt-get clean \
@@ -34,8 +38,8 @@ COPY apache2/ /etc/apache2/
 
 VOLUME /config
 
-EXPOSE 9357
+EXPOSE ${HTTPD_PORT}
 
 CMD ["/etc/apache2/start.sh"]
 
-HEALTHCHECK --interval=60s --timeout=5s CMD curl --silent --location --fail http://localhost:80/ > /dev/null || exit 1
+HEALTHCHECK --interval=60s --timeout=5s CMD /etc/apache2/healthcheck.sh || exit 1
