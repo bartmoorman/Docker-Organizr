@@ -14,7 +14,7 @@ if [ ! -d /var/www/Organizr/images/cache ]; then
 fi
 
 if [ -d /config/httpd/images ]; then
-    ln --symbolic --force /config/httpd/images/* /var/www/Organizr/images
+    ln --symbolic --force /config/httpd/images/* /var/www/Organizr/images/
 fi
 
 if [ ! -d /config/httpd/ssl ]; then
