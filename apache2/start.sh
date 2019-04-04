@@ -1,21 +1,12 @@
 #!/bin/bash
-chown www-data: /config
+chown www-data: /config /var/www/Organizr
 
-if [ ! -d /config/config ]; then
-    install --owner www-data --group www-data --directory /config/config
-    cp --recursive --force /var/www/Organizr/config /config
-fi
-
-rm --recursive --force /var/www/Organizr/config
-ln --symbolic --force /config/config /var/www/Organizr/
-
-if [ ! -d /var/www/Organizr/images/cache ]; then
-    install --owner www-data --group www-data --directory /var/www/Organizr/images/cache
-fi
-
-if [ -d /config/httpd/images ]; then
-    ln --symbolic --force /config/httpd/images/* /var/www/Organizr/images/
-fi
+for dir in api/config plugins/images/cache plugins/images/tabs; do
+    install --owner www-data --group www-data --directory /config/${dir}
+    cp --recursive --update --force /var/www/Organizr/${dir}/* /config/${dir}
+    rm --recursive --force /var/www/Organizr/${dir}
+    ln --symbolic --force /config/${dir} /var/www/Organizr/${dir}
+done
 
 if [ ! -d /config/httpd/ssl ]; then
     mkdir --parents /config/httpd/ssl

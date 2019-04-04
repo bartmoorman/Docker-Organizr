@@ -18,6 +18,7 @@ RUN echo 'deb http://ppa.launchpad.net/certbot/certbot/ubuntu bionic main' > /et
     git \
     libapache2-mod-php \
     php-curl \
+    php-ldap \
     php-sqlite3 \
     php-xml \
     php-zip \
