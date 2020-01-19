@@ -30,7 +30,7 @@ RUN echo 'deb http://ppa.launchpad.net/certbot/certbot/ubuntu bionic main' > /et
  && sed --in-place --regexp-extended \
     --expression 's/^(Include\s+ports\.conf)$/#\1/' \
     /etc/apache2/apache2.conf \
- && git clone https://github.com/causefx/Organizr \
+ && git clone --single-branch https://github.com/causefx/Organizr \
  && apt-get autoremove --yes --purge \
  && apt-get clean \
  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*

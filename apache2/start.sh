@@ -2,14 +2,20 @@
 chown www-data: /config /var/www/Organizr
 
 for dir in api/config plugins/images/cache plugins/images/tabs; do
-    install --owner www-data --group www-data --directory /config/${dir}
-    cp --recursive --update --force /var/www/Organizr/${dir}/* /config/${dir}
-    rm --recursive --force /var/www/Organizr/${dir}
+    if [ ! -d /config/${dir} ]; then
+        install --owner www-data --group www-data --directory /config/${dir}
+    fi
+
+    if [ -d /var/www/Organizr/${dir} ]; then
+        cp --recursive --update --force /var/www/Organizr/${dir}/. /config/${dir}
+        rm --recursive --force /var/www/Organizr/${dir}
+    fi
+
     ln --symbolic --force /config/${dir} /var/www/Organizr/${dir}
 done
 
 if [ ! -d /config/httpd/ssl ]; then
-    mkdir --parents /config/httpd/ssl
+    install --directory /config/httpd/ssl
     ln --symbolic --force /etc/ssl/certs/ssl-cert-snakeoil.pem /config/httpd/ssl/organizr.crt
     ln --symbolic --force /etc/ssl/private/ssl-cert-snakeoil.key /config/httpd/ssl/organizr.key
 fi
