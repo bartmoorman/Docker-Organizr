@@ -1,9 +1,9 @@
 FROM bmoorman/ubuntu:bionic
 
-ENV HTTPD_SERVERNAME="localhost" \
-    HTTPD_PORT="9357"
+ARG DEBIAN_FRONTEND=noninteractive
 
-ARG DEBIAN_FRONTEND="noninteractive"
+ENV HTTPD_SERVERNAME=localhost \
+    HTTPD_PORT=9357
 
 WORKDIR /var/www
 
@@ -30,7 +30,7 @@ RUN echo 'deb http://ppa.launchpad.net/certbot/certbot/ubuntu bionic main' > /et
  && sed --in-place --regexp-extended \
     --expression 's/^(Include\s+ports\.conf)$/#\1/' \
     /etc/apache2/apache2.conf \
- && git clone --single-branch https://github.com/causefx/Organizr \
+ && git clone --single-branch https://github.com/causefx/Organizr.git \
  && apt-get autoremove --yes --purge \
  && apt-get clean \
  && rm --recursive --force /var/lib/apt/lists/* /tmp/* /var/tmp/*
