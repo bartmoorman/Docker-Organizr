@@ -1,7 +1,7 @@
 #!/bin/bash
 chown www-data: /config /var/www/Organizr
 
-for dir in api/config plugins/images/cache plugins/images/tabs; do
+for dir in api/config api/functions/cert plugins/images/cache plugins/images/tabs; do
     if [ ! -d /config/${dir} ]; then
         install --owner www-data --group www-data --directory /config/${dir}
     fi

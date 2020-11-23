@@ -28,7 +28,7 @@ RUN echo 'deb http://ppa.launchpad.net/certbot/certbot/ubuntu bionic main' > /et
     rewrite \
     ssl \
  && sed --in-place --regexp-extended \
-    --expression 's/^(Include\s+ports\.conf)$/#\1/' \
+    --expression 's|^(Include\s+ports\.conf)$|#\1|' \
     /etc/apache2/apache2.conf \
  && git clone --single-branch https://github.com/causefx/Organizr.git \
  && apt-get autoremove --yes --purge \
