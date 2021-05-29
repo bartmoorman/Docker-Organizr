@@ -11,7 +11,6 @@ RUN apt-get update \
  && apt-get install --yes --no-install-recommends \
     apache2 \
     certbot \
-    curl \
     git \
     libapache2-mod-php \
     php-curl \
