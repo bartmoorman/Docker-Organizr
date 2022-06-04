@@ -15,6 +15,8 @@ RUN apt-get update \
     libapache2-mod-php \
     php-curl \
     php-ldap \
+    php-mbstring \
+    php-mysql \
     php-sqlite3 \
     php-xml \
     php-zip \
